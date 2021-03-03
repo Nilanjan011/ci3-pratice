@@ -100,7 +100,11 @@ class NewController extends CI_Controller {
     }
     public function login_view()
     {
-        $this->load->view('login');
+        $csrf = array(
+            'name' => $this->security->get_csrf_token_name(),
+            'hash' => $this->security->get_csrf_hash()
+    );
+        $this->load->view('login',['csrf'=> $csrf]);
     }  
     public function login()
     {
@@ -111,13 +115,18 @@ class NewController extends CI_Controller {
  
              $this->load->view('login');
  
-         }else{ 
+         }else{
+        //    $data=[
+        //        'name'=>$this->input->post('email'),      
+        //        'pass'=>$this->input->post('pass'),            
+        //    ];
+        //    $data = $this->security->xss_clean($data);// clean all HTML tag like <script>alert("XSS")</script>
            $user=$this->g->login_check();
             if ($user) {
                 $users=$this->input->post('email');
                 $this->session->set_userdata("users",$users);
                 // var_dump($this->session->has_userdata('users'));
-                echo ($this->session->userdata('users')); // it's print session value 
+                // echo ($this->session->userdata('users')); // it's print session value 
                 // var_dump($this->session->unset_userdata('users')); // it's unset session value
                 redirect(site_url('home')); 
 

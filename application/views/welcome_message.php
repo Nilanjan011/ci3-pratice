@@ -102,7 +102,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				<td>
 					<a href="<?= site_url('delete/'.$item->id);?>">delete</a></td>;
 				</tr>
-			<?php } ?>
+				
+			                                                                          <?php } ?>
 		
 		</tr>
 	</table>

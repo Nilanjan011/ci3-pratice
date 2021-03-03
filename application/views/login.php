@@ -25,10 +25,9 @@ if ($this->session->flashdata('errors')){
     echo $this->session->flashdata('errors');
     echo "</div>";
 }
-
 ?>
     <form action="<?php echo base_url('index.php/login_post'); ?>" method="post" >
-
+        <input type="hidden" name="<?=$csrf['name'];?>" value="<?=$csrf['hash'];?>" />
         <input type="email" name="email" id="email" placeholder= "email" value="<?php echo set_value('eamil'); ?>">
         <span><?php echo form_error("email");?></span>
         <br><br>
