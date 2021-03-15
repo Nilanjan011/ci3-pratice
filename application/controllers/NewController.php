@@ -82,7 +82,7 @@ class NewController extends CI_Controller {
 
    public function update($id)
    {
-        $this->form_validation->set_rules('email', 'Email', 'required|valid_email|is_unique[user.name]');
+        $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
         $this->form_validation->set_rules('pass', 'Password', 'required');
 
         if ($this->form_validation->run() == FALSE){
@@ -103,19 +103,16 @@ class NewController extends CI_Controller {
         $csrf = array(
             'name' => $this->security->get_csrf_token_name(),
             'hash' => $this->security->get_csrf_hash()
-    );
+        );
         $this->load->view('login',['csrf'=> $csrf]);
     }  
     public function login()
     {
-         $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
-         $this->form_validation->set_rules('pass', 'Password', 'required');
- 
-         if ($this->form_validation->run() == FALSE){
- 
-             $this->load->view('login');
- 
-         }else{
+        $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
+        $this->form_validation->set_rules('pass', 'Password', 'required');
+        if ($this->form_validation->run() == FALSE){
+            $this->load->view('login');
+        }else{
         //    $data=[
         //        'name'=>$this->input->post('email'),      
         //        'pass'=>$this->input->post('pass'),            
@@ -145,7 +142,12 @@ class NewController extends CI_Controller {
         $this->session->unset_userdata('errors'); // it's unset session value
         redirect(site_url('login'));
     }
- 
+
+    public function n()
+    {
+        $data = $this->G_model->get_data();
+        echo json_encode($data);
+    }
 
 
 }

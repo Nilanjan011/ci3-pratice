@@ -6,8 +6,16 @@
     <title>Edit</title>
 </head>
 <body>
-<form action="<?php echo base_url('index.php/update/'.$item->id); ?>" method="post">
+<?php 
+    $csrf = array(
+        'name' => $this->security->get_csrf_token_name(),
+        'hash' => $this->security->get_csrf_hash()
+    );
 
+
+?>
+<form action="<?php echo base_url('index.php/update/'.$item->id); ?>" method="post">
+<input type="hidden" name="<?=$csrf['name'];?>" value="<?=$csrf['hash'];?>" >
     <input type="email" name="email" id="email" placeholder="email" value="<?php echo $item->name; ?>">
     <span><?php echo form_error("email");?></span>
     <br><br>

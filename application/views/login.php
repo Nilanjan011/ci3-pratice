@@ -23,6 +23,7 @@ if ($this->session->flashdata('errors')){
     // print_r($this->session->flashdata('errors'));
     echo '<div class="alert alert-danger">';
     echo $this->session->flashdata('errors');
+    $this->session->unset_userdata('errors');// not testing
     echo "</div>";
 }
 ?>
@@ -37,5 +38,20 @@ if ($this->session->flashdata('errors')){
         <input type="submit" value="submit">
 
     </form>
+    <input type="text" name="data" id="data">
+    <button onclick="go()">Send</button>
+    <h1 id="h1"></h1>
+    <script>
+        function go() {
+            fetch("http://localhost/ci/index.php/n")
+            .then((data) =>{
+              return data.json();
+            }).then((res) =>{
+                console.log(res);
+            })
+        }
+
+    </script>
+
 </body>
 </html>

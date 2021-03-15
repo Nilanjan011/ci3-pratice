@@ -19,6 +19,12 @@
 <body>
     <form action="<?php echo base_url('index.php/postform'); ?>" method="post" enctype="multipart/form-data" >
     <?php
+    
+    $csrf = array(
+        'name' => $this->security->get_csrf_token_name(),
+        'hash' => $this->security->get_csrf_hash()
+    );
+
 
     if ($this->session->flashdata('errors')){
         // print_r($this->session->flashdata('errors'));
@@ -28,7 +34,7 @@
     }
 
     ?>
-
+        <input type="hidden" name="<?=$csrf['name'];?>" value="<?=$csrf['hash'];?>" >
         <input type="email" name="email" id="email" placeholder= "email" value="<?php echo set_value('eamil'); ?>">
         <span><?php echo form_error("email");?></span>
         <br><br>

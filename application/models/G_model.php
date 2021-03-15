@@ -73,14 +73,12 @@ class G_model extends CI_Model{
     }
 
 
-
     public function find_item($id)
     {
 
         return $this->db->get_where('user', array('id' => $id))->row();
 
     }
-
 
 
     public function delete_item($id)
