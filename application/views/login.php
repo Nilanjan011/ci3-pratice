@@ -15,6 +15,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login </title>
+    <script src="<?= base_url() ?>js/jquery.js"></script>
 </head>
 <body>
 <?php
@@ -36,12 +37,31 @@ if ($this->session->flashdata('errors')){
         <span><?php echo form_error("pass");?></span>
         <br><br>
         <input type="submit" value="submit">
-
     </form>
+    <div>
+        <button id="bt1">Button 1</button> <button id="bt2">Button 2</button>
+        <div id="app">
+
+        </div> 
+    </div>
+
+
+
     <input type="text" name="data" id="data">
     <button onclick="go()">Send</button>
     <h1 id="h1"></h1>
     <script>
+       $("#bt1").click(function(){
+         $.ajax({url: "http://localhost/ci/index.php/n", success: function(result){
+           $("#app").html(result);
+         }});
+        });
+        $("#bt2").click(function(){
+         $.ajax({url: "http://localhost/ci/index.php/n2", success: function(result){
+           $("#app").html(result);
+         }});
+        });
+
         function go() {
             fetch("http://localhost/ci/index.php/n")
             .then((data) =>{

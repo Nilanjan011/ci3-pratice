@@ -145,8 +145,18 @@ class NewController extends CI_Controller {
 
     public function n()
     {
-        $data = $this->G_model->get_data();
-        echo json_encode($data);
+        echo "<h1>It is for button 1 response </h1>";
+        // $data = $this->G_model->get_data();
+        // echo json_encode($data);
+    }
+
+    public function n2()
+    {
+        echo "<h1>It is for button 222222222222222 response </h1><br>
+        <form action='' method='get'>
+        <input type='text' placeholder='vhjsdbvdsbf'>
+        <input type='submit' value='Submit'>
+        </form>";
     }
 
 

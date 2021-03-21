@@ -57,6 +57,7 @@ $route['d'] = "NewController/display";
 $route['login'] = "NewController/login_view";
 $route['logout'] = "NewController/logout";
 $route['n'] = "NewController/n";
+$route['n2'] = "NewController/n2";
 $route['home'] = "welcome/home";
 $route['login_post']["post"] = "NewController/login";
 $route['delete/(:num)'] = "NewController/delete/$1";
