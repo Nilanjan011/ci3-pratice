@@ -68,6 +68,7 @@ if ($this->session->flashdata('errors')){
         }
         $("#bt2").click(function () {
             document.getElementById("title").innerHTML = "BTN22222";
+            history.pushState({}, "", "btn2222");
             $.ajax({
                 url: "http://localhost/ci/index.php/n2", success: function (result) {
                     $("#app").html(result);
