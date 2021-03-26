@@ -11,14 +11,16 @@
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login </title>
+    <title id="title">Login </title>
     <script src="<?= base_url() ?>js/jquery.js"></script>
 </head>
+
 <body>
-<?php
+    <?php
 
 if ($this->session->flashdata('errors')){
     // print_r($this->session->flashdata('errors'));
@@ -28,21 +30,25 @@ if ($this->session->flashdata('errors')){
     echo "</div>";
 }
 ?>
-    <form action="<?php echo base_url('index.php/login_post'); ?>" method="post" >
+    <form action="<?php echo base_url('index.php/login_post'); ?>" method="post">
         <input type="hidden" name="<?=$csrf['name'];?>" value="<?=$csrf['hash'];?>" />
-        <input type="email" name="email" id="email" placeholder= "email" value="<?php echo set_value('eamil'); ?>">
-        <span><?php echo form_error("email");?></span>
+        <input type="email" name="email" id="email" placeholder="email" value="<?php echo set_value('eamil'); ?>">
+        <span>
+            <?php echo form_error("email");?>
+        </span>
         <br><br>
         <input type="text" name="pass" id="pass" placeholder="pass" value="<?php echo set_value('pass'); ?>">
-        <span><?php echo form_error("pass");?></span>
+        <span>
+            <?php echo form_error("pass");?>
+        </span>
         <br><br>
         <input type="submit" value="submit">
     </form>
     <div>
-        <button id="bt1">Button 1</button> <button id="bt2">Button 2</button>
+        <button onclick="btn1()">Button 1</button> <button id="bt2">Button 2</button>
         <div id="app">
 
-        </div> 
+        </div>
     </div>
 
 
@@ -51,27 +57,35 @@ if ($this->session->flashdata('errors')){
     <button onclick="go()">Send</button>
     <h1 id="h1"></h1>
     <script>
-       $("#bt1").click(function(){
-         $.ajax({url: "http://localhost/ci/index.php/n", success: function(result){
-           $("#app").html(result);
-         }});
-        });
-        $("#bt2").click(function(){
-         $.ajax({url: "http://localhost/ci/index.php/n2", success: function(result){
-           $("#app").html(result);
-         }});
+        function btn1() {
+            document.getElementById("title").innerHTML = "BTN1";
+            history.pushState({}, "", "btn1");
+            $.ajax({
+                url: "http://localhost/ci/index.php/n", success: function (result) {
+                    $("#app").html(result);
+                }
+            });
+        }
+        $("#bt2").click(function () {
+            document.getElementById("title").innerHTML = "BTN22222";
+            $.ajax({
+                url: "http://localhost/ci/index.php/n2", success: function (result) {
+                    $("#app").html(result);
+                }
+            });
         });
 
         function go() {
             fetch("http://localhost/ci/index.php/n")
-            .then((data) =>{
-              return data.json();
-            }).then((res) =>{
-                console.log(res);
-            })
+                .then((data) => {
+                    return data.json();
+                }).then((res) => {
+                    console.log(res);
+                })
         }
 
     </script>
 
 </body>
+
 </html>
