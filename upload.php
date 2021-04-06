@@ -55,6 +55,8 @@ class Welcome extends CI_Controller {
             'upload_path'=>'upload/',
             'allowed_types'=>'jpg|jpeg|png|gif'
         ];
+         $new_name = time() . '-' . $_FILES["userFile"]['name'];
+         $config['file_name'] = $new_name;
         $this->load->library('upload',$config);
         if ($this->input->post()) {
             $this->form_validation->set_rules('email', 'Email', 'required|valid_email|is_unique[user.email]');
@@ -94,12 +96,16 @@ class Welcome extends CI_Controller {
     }
     public function update($id)
    {
-   		$img=($_FILES["userFile"]["name"]);
+   		// $img=($_FILES["userFile"]["name"]);
+   		// echo $img;die();
+   		$rand=rand(1,9999999999999);
 
    		$config=[
             'upload_path'=>'upload/',
             'allowed_types'=>'jpg|jpeg|png|gif'
         ];
+         $new_name = time() . '-' . $_FILES["userFile"]['name'];
+         $config['file_name'] = $new_name;
         $this->load->library('upload',$config);
         $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
         $this->form_validation->set_rules('phone', 'Phone', 'required');
@@ -108,13 +114,15 @@ class Welcome extends CI_Controller {
         
 
         if ($this->form_validation->run() == FALSE){
-
+        	$this->load->view('header',["title"=>"Edit"]);
             $this->load->view('edit',['item'=>$id]);
+            $this->load->view("footer");
 
         }else{ 
         		if($this->upload->do_upload('userFile'))
                 {
                    $data=$this->upload->data();
+                   $data["raw_name"]=$data["raw_name"];
                    $image_path=('upload/'.$data['raw_name'].$data['file_ext']);
                 }else {
                     $upload_error=$this->upload->display_errors();
@@ -123,9 +131,6 @@ class Welcome extends CI_Controller {
         		$this->user_model->update_item($id,$image_path);
 
           		redirect(site_url('/'));
-
-          	redirect(site_url('/'));
-
         }
 
     }
